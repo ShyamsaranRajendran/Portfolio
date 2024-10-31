@@ -1,16 +1,17 @@
-import './App.css';
-import TextSpan from './TextSpan';
+import '../src/assets/styles/App';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from '../src/pages/Home/Home';
+import About from '../src/pages/About/About';
+import Contact from '../src/pages/Contact/Contact';
+
 function App() {
-  const sen = "Hello Shyam".split("");
   return (
     <div className="App">
-      {sen.map((letter, index) => {
-        return (
-          <TextSpan key={index}>
-            {letter}
-          </TextSpan>
-        );
-      })}
+       <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="About" element={<About />} />
+          <Route path="Contact" element={<Contact />} />
+        </Routes>
     </div>
   );
 }
