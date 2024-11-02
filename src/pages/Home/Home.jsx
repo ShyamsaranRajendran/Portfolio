@@ -19,7 +19,7 @@ const Home = () => {
       </motion.div>
 
       <motion.img
-        src={Profile} // Replace with your profile image path
+        src={Profile} 
         alt="Profile"
         className="profile-image"
         initial={{ opacity: 0, scale: 0.8 }}
