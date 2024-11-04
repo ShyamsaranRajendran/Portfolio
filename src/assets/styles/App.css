@@ -1,176 +1,88 @@
-/* .About {
-    background-color: #f0f0f0;
+body{
+    margin: 0 0;
+    background-color: #ff4e4e;
+    width: 100%;
+    height: 100%;
+}
+.home-container {
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.needle-container {
-    position: relative;
-    width: 360px; 
-    height: 360px;
-    transition: transform 3s ease; 
-}
-
-.needle-container:hover {
-    transform: rotate(180deg); 
-}
-
-.needle {
-    position: absolute;
-    width: 6px;
-    height: 180px;
-    background-color: #b0b0b0;
-    border-radius: 4px 4px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    transform-origin: 50% 110%; 
-}
-
-.needle:nth-child(1) { transform: rotate(0deg); }
-.needle:nth-child(2) { transform: rotate(36deg); }
-.needle:nth-child(3) { transform: rotate(72deg); }
-.needle:nth-child(4) { transform: rotate(108deg); }
-.needle:nth-child(5) { transform: rotate(144deg); }
-.needle:nth-child(6) { transform: rotate(180deg); }
-.needle:nth-child(7) { transform: rotate(216deg); }
-.needle:nth-child(8) { transform: rotate(252deg); }
-.needle:nth-child(9) { transform: rotate(288deg); }
-.needle:nth-child(10) { transform: rotate(324deg); }
-
-.needle::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: -30px;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 20px solid #b0b0b0;
-}
-
-.eye {
-    width: 8px;
-    height: 2px;
-    background-color: #f0f0f0;
-    border-radius: 1px;
-    margin-top: 10px;
-} */
-
-.About {
-    background: linear-gradient(135deg, #ffd194 0%, #70e1f5 100%); /* Gradient background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
     overflow: hidden;
 }
 
-.needle-container {
-    position: absolute; 
-    width: 100%; 
-    height: 100%; 
-    max-width: 360px; 
-    max-height: 360px; 
-    transition: transform 0.3s ease; /* Smooth transitions for movement */
-    border-radius: 50%;
-    border-color: #eebe00;
-    animation: rotate 5s linear infinite; 
+.intro {
+    margin-bottom: 20px;
 }
 
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
 
-@keyframes rotate {
+.view-more-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.view-more-button a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.view-more-button:hover {
+    background-color: #ff4e4e;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.icon {
+    font-size: 1.5em;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.icon:hover {
+    color: #ff6b6b;
+}
+
+.star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    top: -10vh; 
+    background: #ff4e4e;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
     from {
-        transform: rotate(0deg);
+        transform: translateY(-10vh);
     }
     to {
-        transform: rotate(360deg);
-    }
-}
-
-
-.needle-container:hover {
-    transform: rotate(180deg);
-    animation: none;
-}
-
-.needle-container:hover body {
-    background: linear-gradient(135deg, #63e2f8 0%, #ffd194 100%); /* Gradient background */
-}
-
-.needle {
-    position: absolute;
-    width: 10px; 
-    height: 30vh; /* Use viewport height for responsiveness */
-    max-height: 180px; 
-    background: linear-gradient(135deg, #ffa333, #eebe00); /* Gradient for needles */
-    border-radius: 4px 4px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    transform-origin: 50% 100%;
-}
-
-
-.needle:nth-child(1) { transform: rotate(0deg); }
-.needle:nth-child(2) { transform: rotate(36deg); }
-.needle:nth-child(3) { transform: rotate(72deg); }
-.needle:nth-child(4) { transform: rotate(108deg); }
-.needle:nth-child(5) { transform: rotate(144deg); }
-.needle:nth-child(6) { transform: rotate(180deg); }
-.needle:nth-child(7) { transform: rotate(216deg); }
-.needle:nth-child(8) { transform: rotate(252deg); }
-.needle:nth-child(9) { transform: rotate(288deg); }
-.needle:nth-child(10) { transform: rotate(324deg); }
-
-.needle::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0; /* Correcting height to 0 for a proper triangle */
-    border-left: 1.5vw solid transparent; 
-    border-right: 1.5vw solid transparent; 
-    border-top: 20px solid transparent; /* Make this transparent for gradient effect */
-    background: linear-gradient(135deg, #ffa333, #eebe00); /* Apply gradient colors here */
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Use clip-path for triangle shape */
-}
-
-.eye {
-    width: 2vw; 
-    height: 2px;
-    background-color: #f0f0f0;
-    border-radius: 1px;
-    margin-top: 10px;
-}
-
-
-@media (max-width: 600px) {
-    .needle-container {
-        width: 90vw; 
-        height: 90vw; 
-    }
-    .needle {
-        width: 3vw; /* Adjust needle width for smaller screens */
-        height: 25vh; 
-    }
-}
-
-@media (max-width: 400px) {
-    .needle-container {
-        width: 95vw; 
-        height: 95vw; 
-    }
-    .needle {
-        width: 4vw; /* Further adjust needle width for very small screens */
-        height: 20vh; 
+        transform: translateY(110vh);
     }
 }

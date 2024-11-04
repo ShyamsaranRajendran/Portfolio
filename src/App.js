@@ -1,22 +1,24 @@
+import React from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Testimonials from "./components/Testimonials/Testimonials";
+import Contact from "./components/Contact/Contact";
 import '../src/assets/styles/App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from '../src/pages/Home/Home';
-import About from '../src/pages/About/About';
-import Contact from '../src/pages/Contact/Contact';
-
-import { useRoutes } from 'react-router-dom';
-import React from 'react';
 
 const App = () => {
-  // Define routes
-  const routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/about', element: <About /> },
-    { path: '/contact', element: <Contact /> },
-  ]);
+  return (
+    <div>
+     
 
-  return routes;
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
+  );
 };
 
 export default App;
-
