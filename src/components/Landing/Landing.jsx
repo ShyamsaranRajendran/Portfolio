@@ -17,7 +17,6 @@ const Home = () => {
       {showIntro && <Intro />}
       {!showIntro && (
         <div>
-        {/* <Header /> */}
         <DisplayContent/>
         </div>
       )}

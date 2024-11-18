@@ -10,7 +10,6 @@ body {
     background-color: #ffefef;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
@@ -146,10 +145,4 @@ body {
   animation: colorChange 5s infinite linear;
   transition: border-color 0.5s ease;
   border-radius: 15px; /* Optional: adds rounded corners */
-}
-
-
-.DisplayContent img{
-    width: 400px;
-    height: 400px;
 }
