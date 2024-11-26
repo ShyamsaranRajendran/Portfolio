@@ -1,16 +1,17 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Landing from "./components/Landing/Landing.jsx";
-import '../src/assets/styles/App.css';
-
-const App = () => {
+import Hero from './components/Hero.jsx';
+import Projects from './components/Projects.jsx';
+import Skills from './components/Skills.jsx';
+import Contact from './components/Contact.jsx';
+import './styles.css';
+function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-      </Routes>
+    <div className="bg-gray-900">
+      <Hero />
+      <Projects />
+      <Skills />
+      <Contact />
     </div>
   );
-};
+}
 
 export default App;
