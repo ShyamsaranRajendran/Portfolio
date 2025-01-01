@@ -13,6 +13,7 @@ export default function Hero() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          whileHover={{ scale: 1.1 }} // Zoom effect on hover
         >
           <img
             src={profileImage}
@@ -52,7 +53,7 @@ export default function Hero() {
         >
           <a
             href="https://github.com/ShyamsaranRajendran"
-            className="hero-icon text-gray-300 hover:text-blue-400 text-4xl transition transform hover:scale-110 duration-300"
+            className="hero-icon text-gray-300 hover:text-blue-400 text-5xl transition-all transform hover:scale-110 duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,7 +61,7 @@ export default function Hero() {
           </a>
           <a
             href="https://www.linkedin.com/in/shyam-saran"
-            className="hero-icon text-gray-300 hover:text-blue-400 text-4xl transition transform hover:scale-110 duration-300"
+            className="hero-icon text-gray-300 hover:text-blue-400 text-5xl transition-all transform hover:scale-110 duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -74,7 +75,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <button className="hero-button bg-gradient-to-r from-blue-500 to-teal-400 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-teal-400 hover:to-blue-500 shadow-lg transform hover:scale-105 transition duration-300">
+          <button className="hero-button bg-gradient-to-r from-blue-500 to-teal-400 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-teal-400 hover:to-blue-500 shadow-lg transform hover:scale-105 transition-all duration-300">
             <a
               href="https://leetcode.com/u/Shyam5002/"
               target="_blank"
