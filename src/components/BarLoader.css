@@ -1,0 +1,218 @@
+/* Loader Container */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px; /* Added for 3D effect */
+  }
+  
+  /* Loader Bar */
+  .loader-bar {
+    width: 500px;
+    height: 30px;
+    background: linear-gradient(145deg, #222, #333);
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .progress {
+    height: 100%;
+    background: linear-gradient(to right, #00d4ff, #090979, #010146);
+    transition: width 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 212, 255, 0.5);
+    animation: pulse 1.5s infinite alternate;
+  }
+  
+  /* Loader Text */
+  .loader-text {
+    font-size: 60px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #252525;
+    text-shadow: 0px 0px 10px rgba(0, 212, 255, 0.8);
+    animation: fade-in 1s ease-in-out;
+    z-index: 1000;
+  }
+  
+/* Random Moving Circles */
+.moving-circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    opacity: 0.7;
+    transform: translateZ(0); /* Ensure 3D effect */
+    animation: moveCircles 10s infinite alternate;
+  }
+  
+  /* Hover Effect for Moving Circles */
+  .moving-circle:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    .loader-bar {
+      width: 80%; /* Reduce width on smaller screens */
+    }
+  
+    .loader-text {
+      font-size: 50px; /* Slightly smaller text */
+    }
+  
+    .moving-circle {
+      width: 80px; /* Adjust circle size */
+      height: 80px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .loader-bar {
+      width: 90%; /* Adjust width further on very small screens */
+    }
+  
+    .loader-text {
+      font-size: 40px; /* Make text smaller on small devices */
+    }
+  
+    .moving-circle {
+      width: 60px; /* Adjust circle size */
+      height: 60px;
+    }
+  }
+  
+  /* Additional Responsive Tweaks for Larger Screens */
+  @media (min-width: 1024px) {
+    .loader-bar {
+      width: 600px; /* Increase width on larger screens */
+    }
+  
+    .loader-text {
+      font-size: 70px; /* Increase text size for larger screens */
+    }
+  }
+  
+  /* Assigning Different Colors */
+  .circle-0 { background: rgba(255, 69, 0, 0.7); animation: move-0 7s infinite linear alternate; }
+  .circle-1 { background: rgba(0, 255, 127, 0.7); animation: move-1 5s infinite linear alternate; }
+  .circle-2 { background: rgba(30, 144, 255, 0.7); animation: move-2 6s infinite linear alternate; }
+  .circle-3 { background: rgba(255, 165, 0, 0.7); animation: move-3 5.5s infinite linear alternate; }
+  .circle-4 { background: rgba(138, 43, 226, 0.7); animation: move-4 7.5s infinite linear alternate; }
+  .circle-5 { background: rgba(255, 0, 255, 0.7); animation: move-5 6s infinite linear alternate; }
+  .circle-6 { background: rgba(255, 255, 0, 0.7); animation: move-6 7s infinite linear alternate; }
+  .circle-7 { background: rgba(0, 255, 255, 0.7); animation: move-7 5s infinite linear alternate; }
+  .circle-8 { background: rgba(128, 0, 128, 0.7); animation: move-8 6.5s infinite linear alternate; }
+  .circle-9 { background: rgba(0, 128, 128, 0.7); animation: move-9 5.8s infinite linear alternate; }
+  .circle-10 { background: rgba(128, 128, 0, 0.7); animation: move-10 7.2s infinite linear alternate; }
+  .circle-11 { background: rgba(255, 105, 180, 0.7); animation: move-11 6.3s infinite linear alternate; }
+  .circle-12 { background: rgba(173, 216, 230, 0.7); animation: move-12 5.7s infinite linear alternate; }
+  .circle-13 { background: rgba(220, 20, 60, 0.7); animation: move-13 6.1s infinite linear alternate; }
+  .circle-14 { background: rgba(34, 139, 34, 0.7); animation: move-14 7.3s infinite linear alternate; }
+  
+  /* Unique Random Movement Animations */
+  @keyframes move-0 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(50vw, 80vh) translateZ(10px); }
+    100% { transform: translate(-40vw, -60vh) translateZ(20px); }
+  }
+  
+  @keyframes move-1 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-40vw, 70vh) translateZ(15px); }
+    100% { transform: translate(60vw, -50vh) translateZ(25px); }
+  }
+  
+  @keyframes move-2 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(30vw, -50vh) translateZ(20px); }
+    100% { transform: translate(-40vw, 60vh) translateZ(10px); }
+  }
+  
+  @keyframes move-3 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(60vw, 50vh) translateZ(30px); }
+    100% { transform: translate(-50vw, -70vh) translateZ(20px); }
+  }
+  
+  @keyframes move-4 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-30vw, 40vh) translateZ(10px); }
+    100% { transform: translate(40vw, -30vh) translateZ(15px); }
+  }
+  
+  @keyframes move-5 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-60vw, 50vh) translateZ(10px); }
+    100% { transform: translate(40vw, -40vh) translateZ(30px); }
+  }
+  
+  @keyframes move-6 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(20vw, -60vh) translateZ(20px); }
+    100% { transform: translate(-60vw, 40vh) translateZ(30px); }
+  }
+  
+  @keyframes move-7 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(40vw, 30vh) translateZ(20px); }
+    100% { transform: translate(-30vw, -80vh) translateZ(10px); }
+  }
+  
+  @keyframes move-8 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-40vw, 60vh) translateZ(10px); }
+    100% { transform: translate(50vw, -40vh) translateZ(20px); }
+  }
+  
+  @keyframes move-9 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(60vw, -30vh) translateZ(10px); }
+    100% { transform: translate(-50vw, 50vh) translateZ(25px); }
+  }
+  
+  @keyframes move-10 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-60vw, 30vh) translateZ(10px); }
+    100% { transform: translate(40vw, -50vh) translateZ(20px); }
+  }
+  
+  @keyframes move-11 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(30vw, -40vh) translateZ(15px); }
+    100% { transform: translate(-40vw, 60vh) translateZ(30px); }
+  }
+  
+  @keyframes move-12 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(20vw, 50vh) translateZ(20px); }
+    100% { transform: translate(-50vw, -30vh) translateZ(10px); }
+  }
+  
+  @keyframes move-13 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(-50vw, 40vh) translateZ(10px); }
+    100% { transform: translate(30vw, -60vh) translateZ(20px); }
+  }
+  
+  @keyframes move-14 {
+    0% { transform: translate(0, 0) translateZ(0); }
+    50% { transform: translate(40vw, -50vh) translateZ(20px); }
+    100% { transform: translate(-30vw, 70vh) translateZ(15px); }
+  }
+  
+  /* Fade-in Effect */
+  @keyframes fade-in {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  

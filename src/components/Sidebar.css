@@ -1,0 +1,146 @@
+
+  /* Sidebar container */
+  .sidebar-container {
+    position: relative;
+  }
+  
+  /* Sidebar style */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Sidebar starts hidden */
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6ec7, #ff9a8b, #ff4e50);
+    background-size: 300% 300%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.3s ease-in-out;
+    animation: sidebarBackground 6s ease infinite;
+  }
+  
+  /* Open Sidebar */
+  .sidebar.open {
+    left: 0;
+  }
+  
+  /* Hamburger icon button */
+  .sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .sidebar-toggle:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.1);
+  }
+  
+  /* Sidebar Navigation */
+  .sidebar-nav {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-nav ul li {
+    margin: 20px 0;
+  }
+  
+  .sidebar-nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover effect for Links */
+  .sidebar-nav a:hover {
+    color: #ffeb3b;
+  }
+  
+  /* Cursor effect on hover */
+  .sidebar-nav a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #ffeb3b;
+    animation: cursorEffect 0.5s linear forwards;
+  }
+  
+  /* Sidebar Background Gradient Animation */
+  @keyframes sidebarBackground {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Cursor underline animation */
+  @keyframes cursorEffect {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .sidebar {
+      left: -250px; /* Hide sidebar on mobile screens initially */
+    }
+  
+    .sidebar.open {
+      left: 0; /* Show sidebar when open class is applied */
+    }
+  
+    .sidebar-nav ul {
+      padding-top: 60px;
+    }
+  
+    /* Adjust the toggle button */
+    .sidebar-toggle {
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .sidebar {
+      left: 0; /* Always show sidebar on larger screens */
+    }
+  
+    .sidebar-toggle {
+      display: none; /* Hide hamburger icon on larger screens */
+    }
+  }
+  
