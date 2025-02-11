@@ -1,115 +1,126 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ExternalLinkIcon, GithubIcon } from 'lucide-react';
 
 const projects = [
   {
-    title: "Project 1",
-    description: "A full-stack web application built with React and Node.js",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "Node.js", "MongoDB"],
-    github: "#",
-    demo: "#",
+    title: 'E-Commerce Platform',
+    description: 'A modern e-commerce platform built with Next.js and Stripe',
+    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Next.js', 'TypeScript', 'Stripe', 'Tailwind CSS'],
+    links: {
+      live: '#',
+      github: '#'
+    }
   },
   {
-    title: "Project 2",
-    description: "Mobile-first responsive web application",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "Firebase", "Tailwind"],
-    github: "#",
-    demo: "#",
+    title: '3D Product Configurator',
+    description: 'Interactive 3D product visualization using Three.js',
+    image: 'https://images.unsplash.com/photo-1633899306328-c5e70574aaa3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+    tags: ['React', 'Three.js', 'GSAP', 'WebGL'],
+    links: {
+      live: '#',
+      github: '#'
+    }
   },
   {
-    title: "Project 3",
-    description: "Real-time data visualization dashboard",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "D3.js", "WebSocket"],
-    github: "#",
-    demo: "#",
-  },
+    title: 'AI Chat Application',
+    description: 'Real-time chat app with AI-powered responses',
+    image: 'https://images.unsplash.com/photo-1676299081847-824916de030a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+    tags: ['React', 'Node.js', 'Socket.io', 'OpenAI'],
+    links: {
+      live: '#',
+      github: '#'
+    }
+  }
 ];
 
-export default function Projects() {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (index) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: index * 0.2, duration: 0.6, ease: "easeOut" },
-    }),
-  };
+const ProjectCard = ({ project, index }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section className="py-20 bg-gray-900 text-white" id="projects">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-12"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          Projects
-        </motion.h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className="project-card bg-gray-800 rounded-lg shadow-lg transform hover:scale-105 hover:shadow-2xl hover:bg-gray-700 p-6"
-              custom={index}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
+    <motion.div
+      ref={cardRef}
+      style={{ y, opacity }}
+      className="group relative bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10" />
+      <div className="relative h-[400px]">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+        />
+      </div>
+      <div className="relative z-20 p-6 -mt-20">
+        <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+        <p className="text-gray-300 mb-4">{project.description}</p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 bg-purple-500/20 rounded-full text-sm text-purple-300"
             >
-              <motion.img
-                src={project.image}
-                alt={project.title}
-                className="project-image w-full h-56 object-cover rounded-lg mb-6"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              />
-              <div className="project-content">
-                <h3 className="text-2xl font-semibold text-blue-400 mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  {project.description}
-                </p>
-                <div className="project-tech mb-4">
-                  {project.tech.map((tech, i) => (
-                    <motion.span
-                      key={i}
-                      className="tech-badge inline-block bg-blue-600 text-white text-xs px-3 py-1 rounded-full mr-2 mb-2"
-                      whileHover={{
-                        scale: 1.2,
-                        backgroundColor: "#1E90FF",
-                      }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </div>
-                <div className="project-links flex space-x-4">
-                  <motion.a
-                    href={project.github}
-                    className="project-link text-blue-500 hover:underline"
-                    whileHover={{ scale: 1.1, color: "#1E90FF" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    GitHub
-                  </motion.a>
-                  <motion.a
-                    href={project.demo}
-                    className="project-link text-green-500 hover:underline"
-                    whileHover={{ scale: 1.1, color: "#32CD32" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Live Demo
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex gap-4">
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href={project.links.live}
+            className="flex items-center gap-2 px-4 py-2 bg-purple-500 rounded-lg hover:bg-purple-600 transition-colors"
+          >
+            <ExternalLinkIcon className="w-4 h-4" />
+            Live Demo
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href={project.links.github}
+            className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+          >
+            <GithubIcon className="w-4 h-4" />
+            Source Code
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Projects = () => {
+  return (
+    <div className="min-h-screen bg-gray-900 py-24">
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-white mb-4">Featured Projects</h2>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            A selection of my recent work, showcasing web development expertise and creative solutions
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default Projects;

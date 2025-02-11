@@ -6,7 +6,7 @@ import "./index.css";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 ReactDOM.render(
-  <BrowserRouter> {/* Only use BrowserRouter once here */}
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.getElementById("root")
