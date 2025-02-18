@@ -1,0 +1,105 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Code, ExternalLink } from 'lucide-react';
+import { ParallaxCard } from '../components/ParallaxCard';
+
+export function Projects() {
+  const projects = [
+    {
+      title: "StockVision",
+      description: "Dynamic stock market visualization platform with real-time updates and interactive charts.",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=1000",
+      tech: ["TypeScript", "Node.js", "MongoDB", "React", "Tailwind"],
+      link: "https://github.com/shyam/stockvision"
+    },
+    {
+      title: "BillWise",
+      description: "Scalable billing system with ML-powered features for subscription management and revenue forecasting.",
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1000",
+      tech: ["Python", "Flask", "React", "MongoDB", "AWS"],
+      link: "https://github.com/shyam/billwise"
+    },
+    {
+      title: "BrewTrack",
+      description: "Full-stack application for managing orders, inventory, and IoT-enabled parking systems.",
+      image: "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=80&w=1000",
+      tech: ["React", "Node.js", "MongoDB", "IoT", "AWS"],
+      link: "https://github.com/shyam/brewtrack"
+    },
+    {
+      title: "NextEdu",
+      description: "Personalized higher education recommendation platform with ML-powered insights.",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000",
+      tech: ["React", "Python", "Flask", "MongoDB", "ML"],
+      link: "https://github.com/shyam/nextedu"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl font-bold mb-12 text-center font-syncopate"
+        >
+          Projects
+        </motion.h1>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <ParallaxCard className="h-full">
+                <div className="bg-gray-800 rounded-xl overflow-hidden h-full">
+                  <div className="aspect-w-16 aspect-h-9 relative group">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white/20 rounded-full backdrop-blur-sm hover:bg-white/30 transition-colors"
+                      >
+                        <ExternalLink className="w-6 h-6" />
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                      <Code className="w-5 h-5" />
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, idx) => (
+                        <motion.span
+                          key={idx}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + idx * 0.1 }}
+                          className="px-3 py-1 bg-white/10 rounded-full text-sm hover:bg-white/20 transition-colors"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </ParallaxCard>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

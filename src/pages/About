@@ -1,0 +1,166 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Award, Briefcase, GraduationCap, Code } from 'lucide-react';
+import { ParallaxCard } from '../components/ParallaxCard';
+
+export function About() {
+  const containerRef = motion.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
+  return (
+    <div ref={containerRef} className="min-h-screen py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl font-bold mb-12 text-center font-syncopate"
+        >
+          About Me
+        </motion.h1>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Profile Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ParallaxCard>
+              <div className="bg-gray-800 rounded-xl p-6">
+                <h2 className="text-2xl font-bold mb-4">Profile</h2>
+                <p className="text-gray-300 mb-6">
+                  Aspiring Software Development Engineer with a strong foundation in full-stack development,
+                  algorithms, and cloud computing. Passionate about building scalable, high-performance
+                  applications and continuously learning new technologies.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Code className="w-5 h-5 text-blue-400" />
+                    <span>Full Stack Developer</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <GraduationCap className="w-5 h-5 text-green-400" />
+                    <span>Computer Science Engineering</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Briefcase className="w-5 h-5 text-purple-400" />
+                    <span>2+ Years Experience</span>
+                  </div>
+                </div>
+              </div>
+            </ParallaxCard>
+          </motion.div>
+
+          {/* Skills Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ParallaxCard>
+              <div className="bg-gray-800 rounded-xl p-6">
+                <h2 className="text-2xl font-bold mb-4">Skills</h2>
+                <div className="space-y-6">
+                  {[
+                    {
+                      category: "Languages",
+                      skills: ["Java", "Python", "C/C++", "JavaScript", "TypeScript"]
+                    },
+                    {
+                      category: "Frameworks",
+                      skills: ["React", "Node.js", "Flask", "FastAPI", "Express"]
+                    },
+                    {
+                      category: "Tools",
+                      skills: ["Git", "Docker", "AWS", "MongoDB", "PostgreSQL"]
+                    }
+                  ].map((skillGroup, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">{skillGroup.category}</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {skillGroup.skills.map((skill, idx) => (
+                          <motion.span
+                            key={idx}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 + idx * 0.1 }}
+                            className="px-3 py-1 bg-white/10 rounded-full text-sm"
+                          >
+                            {skill}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ParallaxCard>
+          </motion.div>
+        </div>
+
+        {/* Experience Timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-20"
+        >
+          <h2 className="text-2xl font-bold mb-8 text-center">Experience</h2>
+          <div className="space-y-8">
+            {[
+              {
+                title: "Software Developer",
+                company: "Codelancing",
+                period: "Nov. 2024 – Present",
+                details: [
+                  "Built and maintained full-stack web applications",
+                  "Designed scalable database architectures"
+                ]
+              },
+              {
+                title: "Junior Software Developer",
+                company: "Rattai",
+                period: "Mar. 2024 – Jul. 2024",
+                details: [
+                  "Built scalable backend systems",
+                  "Developed full-stack applications"
+                ]
+              }
+            ].map((job, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <ParallaxCard>
+                  <div className="bg-gray-800 rounded-xl p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-white/10 rounded-lg">
+                        <Briefcase className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold">{job.title}</h3>
+                        <p className="text-gray-400">{job.company} | {job.period}</p>
+                        <ul className="mt-4 space-y-2">
+                          {job.details.map((detail, idx) => (
+                            <li key={idx} className="text-gray-300">• {detail}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </ParallaxCard>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,131 @@
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { MagneticButton } from '../components/MagneticButton';
+import { ParallaxCard } from '../components/ParallaxCard';
+
+export function Contact() {
+  return (
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl font-bold mb-12 text-center font-syncopate"
+        >
+          Get in Touch
+        </motion.h1>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ParallaxCard>
+              <div className="bg-gray-800 rounded-xl p-6 space-y-6">
+                <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+                
+                {[
+                  {
+                    icon: <Mail className="w-5 h-5" />,
+                    label: "Email",
+                    value: "shyamsaran6.2.2005@gmail.com",
+                    href: "mailto:shyamsaran6.2.2005@gmail.com"
+                  },
+                  {
+                    icon: <Phone className="w-5 h-5" />,
+                    label: "Phone",
+                    value: "+91 8438213467",
+                    href: "tel:+918438213467"
+                  },
+                  {
+                    icon: <MapPin className="w-5 h-5" />,
+                    label: "Location",
+                    value: "Erode, Tamil Nadu, India"
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="p-3 bg-white/10 rounded-lg">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-gray-400">{item.label}</p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="text-lg hover:text-blue-400 transition-colors"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-lg">{item.value}</p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </ParallaxCard>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ParallaxCard>
+              <div className="bg-gray-800 rounded-xl p-6">
+                <h2 className="text-2xl font-bold mb-6">Send Message</h2>
+                <form className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      rows={4}
+                      className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                    />
+                  </div>
+                  <MagneticButton>
+                    <button
+                      type="submit"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium flex items-center justify-center gap-2 hover:from-blue-600 hover:to-purple-600 transition-colors"
+                    >
+                      Send Message
+                      <Send className="w-4 h-4" />
+                    </button>
+                  </MagneticButton>
+                </form>
+              </div>
+            </ParallaxCard>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

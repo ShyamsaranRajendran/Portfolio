@@ -1,0 +1,141 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { GithubIcon, LinkedinIcon, MailIcon, FileText } from 'lucide-react';
+import { GravityText } from '../components/GravityText';
+import { MagneticButton } from '../components/MagneticButton';
+import { ParallaxCard } from '../components/ParallaxCard';
+
+export function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
+    <div ref={containerRef} className="min-h-screen">
+      {/* Hero Section */}
+      <motion.section 
+        className="h-screen flex items-center justify-center relative overflow-hidden"
+        style={{ y, opacity }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 font-syncopate">
+              <GravityText text="Shyamsaran R" />
+            </h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="text-xl md:text-2xl text-gray-300 mb-8"
+            >
+              Software Development Engineer
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="flex justify-center space-x-6"
+            >
+              {[
+                { href: "https://github.com/shyam", icon: <GithubIcon size={24} />, label: "GitHub" },
+                { href: "https://linkedin.com/in/shyam", icon: <LinkedinIcon size={24} />, label: "LinkedIn" },
+                { href: "mailto:shyamsaran6.2.2005@gmail.com", icon: <MailIcon size={24} />, label: "Email" },
+                { href: "/resume.pdf", icon: <FileText size={24} />, label: "Resume" }
+              ].map((link, index) => (
+                <MagneticButton key={index}>
+                  <a
+                    href={link.href}
+                    className="relative group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
+                      {link.label}
+                    </span>
+                    <div className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      {link.icon}
+                    </div>
+                  </a>
+                </MagneticButton>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Featured Projects Preview */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold mb-12 text-center font-syncopate"
+          >
+            Featured Work
+          </motion.h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "StockVision",
+                description: "Real-time stock market visualization platform",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=1000",
+                tags: ["TypeScript", "React", "Node.js", "MongoDB"]
+              },
+              {
+                title: "BillWise",
+                description: "ML-powered billing system",
+                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1000",
+                tags: ["Python", "Flask", "React", "AWS"]
+              }
+            ].map((project, index) => (
+              <ParallaxCard key={index} className="group">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="relative overflow-hidden rounded-xl"
+                >
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                    <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-gray-300 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-white/10 rounded-full text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </ParallaxCard>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

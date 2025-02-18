@@ -1,0 +1,109 @@
+import { useEffect, useRef } from 'react';
+import Matter from 'matter-js';
+
+interface Props {
+  text: string;
+}
+
+export function GravityText({ text }: Props) {
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const engineRef = useRef<Matter.Engine>();
+  const worldRef = useRef<Matter.World>();
+
+  useEffect(() => {
+    if (!sceneRef.current) return;
+
+    const Engine = Matter.Engine;
+    const Render = Matter.Render;
+    const World = Matter.World;
+    const Bodies = Matter.Bodies;
+
+    // Create engine and world
+    engineRef.current = Engine.create();
+    worldRef.current = engineRef.current.world;
+
+    // Create renderer
+    const render = Render.create({
+      element: sceneRef.current,
+      engine: engineRef.current,
+      options: {
+        width: window.innerWidth,
+        height: 400,
+        wireframes: false,
+        background: 'transparent',
+      }
+    });
+
+    // Create letters
+    const letters = text.split('').map((letter, i) => {
+      return Bodies.rectangle(
+        50 + i * 50,
+        0,
+        40,
+        40,
+        {
+          render: {
+            fillStyle: '#fff',
+            text: {
+              content: letter,
+              color: '#fff',
+              size: 20,
+              family: 'Space Grotesk'
+            }
+          }
+        }
+      );
+    });
+
+    // Add ground
+    const ground = Bodies.rectangle(
+      window.innerWidth / 2,
+      400,
+      window.innerWidth,
+      60,
+      { isStatic: true, render: { fillStyle: 'transparent' } }
+    );
+
+    // Add walls
+    const leftWall = Bodies.rectangle(0, 200, 60, 400, {
+      isStatic: true,
+      render: { fillStyle: 'transparent' }
+    });
+    const rightWall = Bodies.rectangle(window.innerWidth, 200, 60, 400, {
+      isStatic: true,
+      render: { fillStyle: 'transparent' }
+    });
+
+    World.add(worldRef.current, [...letters, ground, leftWall, rightWall]);
+
+    // Run the engine
+    Engine.run(engineRef.current);
+    Render.run(render);
+
+    // Handle window resize
+    const handleResize = () => {
+      render.canvas.width = window.innerWidth;
+      render.canvas.height = 400;
+      Matter.Body.setPosition(ground, {
+        x: window.innerWidth / 2,
+        y: 400
+      });
+      Matter.Body.setPosition(rightWall, {
+        x: window.innerWidth,
+        y: 200
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      Render.stop(render);
+      World.clear(worldRef.current, false);
+      Engine.clear(engineRef.current);
+      render.canvas.remove();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [text]);
+
+  return <div ref={sceneRef} className="w-full h-[400px]" />;
+}

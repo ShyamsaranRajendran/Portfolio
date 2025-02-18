@@ -1,0 +1,25 @@
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+
+export function ScrollIndicator() {
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const background = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['linear-gradient(to bottom, #00ffff, #ff00ff)', 'linear-gradient(to bottom, #ff00ff, #00ffff)']
+  );
+
+  return (
+    <div className="scroll-indicator">
+      <motion.div
+        className="h-full w-full"
+        style={{ scaleY, background, originY: 0 }}
+      />
+    </div>
+  );
+}
